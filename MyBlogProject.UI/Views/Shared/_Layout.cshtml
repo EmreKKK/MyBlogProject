@@ -1,0 +1,168 @@
+﻿@using MyBlogProject.Entity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <script src="~/Content/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
+    <link href="~/Content/Login-SignUp.css" rel="stylesheet" />
+
+</head>
+<body>
+    @{
+        User user = null;
+        if (Session["login"] != null)
+        {
+            user = Session["login"] as User;
+        }
+    }
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand fw-bold" href="/Home">MyBlogProject</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+
+
+
+                    <li class="nav-item"><a class="btn btn-outline-dark text-start border-0" href="/Home"><span class="bi-house-fill"></span> Home</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-dark text-start border-0" href="/Home/MostLiked"><span class="bi-star-fill"></span> Most Popular</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-dark text-start border-0" href="/Home/Index"><span class="bi-pen-fill"></span> Last Ones</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-dark text-start border-0" href="/Home/About"><span class="bi-person-fill"></span> About Us</a></li>
+
+                    @if (user != null && user.IsAdmin == true)
+                    {
+                        <li class="nav-item"><a class="btn btn-outline-dark text-start border-0" href="/Home/About"><span class="bi bi-display-fill"></span> Administration</a></li>
+                    }
+
+
+
+
+                    @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>*@
+                </ul>
+
+                @{
+                    if (user == null)
+                    {
+
+
+                        <form class="d-flex mx-1">
+                            <a class="btn btn-outline-dark border-0" href="/Home/Register" role="button"> Register <span class="bi-person-fill-add pe-1 float-start"></span></a>
+                        </form>
+
+
+
+                        <form class="d-flex">
+                            <a class="btn btn-outline-dark border-0" href="/Home/Login" role="button"> Login <span class="bi-person-circle pe-1 float-start"></span></a>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="d-flex">
+                            <a class="btn btn-outline-dark border-0" href="#" role="button"> @user.Username <span class="bi-person-fill pe-1 float-start"></span></a>
+                        </form>
+
+                        <form class="d-flex">
+                            <a class="btn btn-outline-dark border-0" href="/Home/Logout" role="button"> Logout <span class="<bi bi-door-open-fill float-start"></span></a>
+                        </form>
+                    }
+                }
+
+
+
+
+
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+    <!-- Footer-->
+
+
+    <div id="footer">
+        <hr />
+        <div class="container">
+
+            <div class="row py-1 bg-white">
+                <div class="col-lg-4 text-center text-dark">
+                    <h5>
+                        <strong>Site Map</strong>
+                    </h5>
+                    <br />
+                    <p>
+                        @*<a href="#">Home</a><br />
+                            <a href="#">Most Popular</a><br />
+                            <a href="#">Last Ones</a><br />
+                            <a href="#">About Us</a>*@
+                        <a class="list-group-item btn btn-outline-dark border-0 text-start" href="#!"><span class="bi-caret-right-fill"></span>Home</a>
+                        <a class="list-group-item btn btn-outline-dark border-0 text-start" href="#!"><span class="bi-caret-right-fill"></span>Most Popular</a>
+                        <a class="list-group-item btn btn-outline-dark border-0 text-start" href="#!"><span class="bi-caret-right-fill"></span>Last Ones</a>
+                        <a class="list-group-item btn btn-outline-dark border-0 text-start" href="#!"><span class="bi-caret-right-fill"></span>About Us</a>
+                    </p>
+                </div>
+                <div class="col-lg-4 text-center text-dark">
+                    <h5>
+                        <strong>My Blog Project</strong>
+                    </h5>
+                    <br />
+                    <p>
+                        Copyright &copy; Your Website 2022
+                    </p>
+                </div>
+                <div class="col-lg-4 text-center text-dark">
+                    <h5>
+                        <strong>E-Newsletter</strong>
+                    </h5>
+                    <br />
+                    <p>
+                        Consectetur adipiscing elit fusce vel.
+                    </p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Your e-mail:" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-dark" type="submit">
+                                <span class="bi-send"></span> Send
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/Content/js/scripts.js"></script>
+</body>
+</html>

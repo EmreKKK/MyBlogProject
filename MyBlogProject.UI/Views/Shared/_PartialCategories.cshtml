@@ -1,0 +1,22 @@
+﻿@using MyBlogProject.BLL
+@using MyBlogProject.Entity
+
+@{
+    CategoryManager cm = new CategoryManager();
+    List<Category> list = cm.GetCategories();
+}
+
+
+<div class="list-group list-group-flush ">
+
+    <a class="list-group-item btn btn-outline-dark p-3 text-start" href="/Home/Index"><span class="bi-caret-right-fill"></span>All</a>
+
+    @{
+        foreach (Category item in list)
+        {
+            <a class="list-group-item btn btn-outline-dark p-3 text-start" href="/Home/ByCategory/@item.Id"><span class="bi-caret-right-fill"></span>@item.Title</a>
+        }
+    }
+
+
+</div>

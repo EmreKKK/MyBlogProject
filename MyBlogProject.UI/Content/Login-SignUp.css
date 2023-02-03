@@ -1,0 +1,49 @@
+﻿.gradient-custom {
+    /* fallback for old browsers */
+    /*    height:auto;*/
+    height: max-content /*!important*/;
+    align-items: center;
+    background: #6a11cb;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.gradient-customm {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    min-height: 100vh;
+    background-attachment: fixed;
+    height: 1050px;
+}
+
+.gradient-custommm {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+.gradient-text {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-size: 30px;
+}
+
+
+.my-custom-btn {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+    .my-custom-btn:hover {
+        background: white;
+        color: rgba(106, 17, 203, 1);
+    }

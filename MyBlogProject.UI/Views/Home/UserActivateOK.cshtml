@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Account's been Activated Successfully";
+}
+
+
+<link href="~/Content/Login-SignUp.css" rel="stylesheet" />
+
+
+
+<section class="gradient-customm">
+    <style>
+        .gradient-customm {
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            height: 950px;
+        }
+    </style>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div id="text" class="card-body p-5 text-center gradient-text">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <br />
+                            <br />
+                            <h2 class="fw-bold mb-2 text-uppercase">Redirecting...</h2>
+                            <br />
+                            <br />
+                            <br />
+                            <div id="text" class="gradient-text">
+                                <h2><span class="bi bi-check-lg"></span>&nbsp;&nbsp;&nbsp;&nbsp;Account has been activated successfully</h2>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    $(document).ready(function () {
+        $('#footer').hide();
+    });
+
+    setTimeout(function () {
+        window.location = "/Home/Index";
+    }, 3000);
+</script>
+
+
+@*<script>
+        $(function () {
+            $("footer").parent().hide();
+
+            setTimeout(function () {
+                window.location = "/Home/Index";
+            }, 3000);
+        })
+    </script>*@
+
