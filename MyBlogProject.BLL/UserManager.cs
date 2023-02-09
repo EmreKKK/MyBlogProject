@@ -14,7 +14,7 @@ namespace MyBlogProject.BLL
 {
     public class UserManager
     {
-        private Repository<User> repo_user = new Repository<User>();
+        private static Repository<User> repo_user = new Repository<User>();
         public BusinessLayerResult<User> RegisterUser(RegisterViewModel model)
         {
 
@@ -221,6 +221,18 @@ namespace MyBlogProject.BLL
 
         }
 
+        public static BusinessLayerResult<User> GetUserById(int id)
+        {
+            BusinessLayerResult<User> res = new BusinessLayerResult<User>();
 
+            res.Result = repo_user.Find(x => x.Id == id);
+
+            if (res.Result == null)
+            {
+                res.AddError(ErrorMessageCode.UserIsNotFound, "User is not found.");
+            }
+            return res;
+
+        }
     }
 }

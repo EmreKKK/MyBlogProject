@@ -15,5 +15,6 @@ namespace MyBlogProject.Entity.Messages
         UnavailableEmail = 1005,
         UserAlreadyActive = 1006,
         ActivationIdDoesNotExist = 1007,
+        UserIsNotFound = 1008,
     }
 }

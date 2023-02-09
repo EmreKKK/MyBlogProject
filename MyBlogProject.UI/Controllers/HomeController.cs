@@ -203,7 +203,22 @@ namespace MyBlogProject.UI.Controllers
 
         public ActionResult ShowProfile()
         {
-            return View();
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("login");
+            }
+            User currentUser = Session["login"] as User;
+
+            //BusinessLayerResult<User> res = UserManager.GetUserById(currentUser.Id);
+
+            //if (res.Errors.Count > 0)
+            //{
+
+            //}
+
+            //return View(res.Result);
+
+            return View(currentUser);
         }
 
         public ActionResult EditProfile()
