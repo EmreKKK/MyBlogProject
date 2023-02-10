@@ -16,5 +16,6 @@ namespace MyBlogProject.Entity.Messages
         UserAlreadyActive = 1006,
         ActivationIdDoesNotExist = 1007,
         UserIsNotFound = 1008,
+        ProfileCouldNotUpdated = 1009,
     }
 }

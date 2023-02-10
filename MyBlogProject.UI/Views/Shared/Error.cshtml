@@ -1,11 +1,11 @@
-﻿
+﻿@using MyBlogProject.UI.ViewModels
+@using MyBlogProject.Entity.Messages
+@model ErrorViewModel
 @{
-    ViewBag.Title = "Account's been Activated Successfully";
+    ViewBag.Title = Model.Title;
 }
 
-
-<link href="~/Content/Login-SignUp.css" rel="stylesheet" />
-
+<link href="~/Content/login-register.css" rel="stylesheet" />
 
 
 <section class="gradient-customm">
@@ -24,13 +24,21 @@
                         <div class="mb-md-5 mt-md-4 pb-5">
                             <br />
                             <br />
-                            <h2 class="fw-bold mb-2 text-uppercase">Redirecting...</h2>
+                            <h2 class="fw-bold mb-2 text-uppercase">@Model.Header</h2>
+                            <br />
+                            <br />
                             <br />
                             <br />
                             <br />
                             <div id="text" class="gradient-text">
-                                <h2><span class="bi bi-check-lg"></span>&nbsp;&nbsp;&nbsp;&nbsp;Account has been activated successfully</h2>
+                                <h2><span class="bi bi-check-lg"></span>&nbsp;&nbsp;&nbsp;&nbsp;@Model.Title</h2>
                                 <br />
+                                <p class="text-justify">
+                                    @foreach (string msg in Model.Items)
+                                    {
+                                        @msg<br />
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -41,24 +49,21 @@
 </section>
 
 
+@{
+    string js = string.Empty;
+
+    if (Model.IsRedirecting)
+    {
+        js = " setTimeout(function () {window.location ='" + Model.RedirectingUrl + "' }," + Model.RedirectingTimeout + ")";
+    }
+}
+
+
 <script>
-    $(document).ready(function () {
-        $('#footer').hide();
+    $(function () {
+        $("footer").parent().hide();
+
+        @Html.Raw(js);
+
     });
-
-    setTimeout(function () {
-        window.location = "/Home/Index";
-    }, 3000);
 </script>
-
-
-@*<script>
-        $(function () {
-            $("footer").parent().hide();
-
-            setTimeout(function () {
-                window.location = "/Home/Index";
-            }, 3000);
-        })
-    </script>*@
-

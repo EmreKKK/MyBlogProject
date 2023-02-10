@@ -2,6 +2,7 @@
 using MyBlogProject.Entity;
 using MyBlogProject.Entity.Messages;
 using MyBlogProject.Entity.ViewModels;
+using MyBlogProject.UI.ViewModels;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -152,7 +153,17 @@ namespace MyBlogProject.UI.Controllers
                     return View(model);
                 }
 
-                return RedirectToAction("RegisterOK");
+                OkViewModel notifyObj = new OkViewModel()
+                {
+                    Title = "Register is Successful",
+                    RedirectingUrl = "/Home/Login",
+
+                };
+
+                notifyObj.Items.Add("Please check your mailbox and click the activation link to complete your account.");
+
+                return View("Ok", notifyObj);
+
             }
 
 
@@ -161,38 +172,30 @@ namespace MyBlogProject.UI.Controllers
             return View(model);
         }
 
-        public ActionResult RegisterOK()
-        {
-            return View();
-        }
+
         public ActionResult UserActivate(Guid id)
         {
             BusinessLayerResult<User> res = um.ActivateUser(id);
 
             if (res.Errors.Count > 0)
             {
-                TempData["errors"] = res.Errors;
+                ErrorViewModel errorObj = new ErrorViewModel()
+                {
+                    Items = res.Errors
+                };
 
-                return RedirectToAction("UserActivateCancel");
+                return View("Error", errorObj);
             }
-            return RedirectToAction("UserActivateOK");
-        }
-
-        public ActionResult UserActivateOK()
-        {
-            return View();
-        }
-
-        public ActionResult UserActivateCancel()
-        {
-            List<ErrorMessageObj> errors = null;
-
-            if (TempData["errors"] != null)
+            OkViewModel notifyObj = new OkViewModel()
             {
-                errors = TempData["errors"] as List<ErrorMessageObj>;
-            }
+                Title = "Account has been activated. ",
+                RedirectingUrl = "/Home/Login",
 
-            return View(errors);
+            };
+
+            notifyObj.Items.Add("Blog, Comment, Like... Now Whatever you want you can do it!");
+
+            return View("Ok", notifyObj);
         }
 
         public ActionResult Logout()
@@ -223,11 +226,42 @@ namespace MyBlogProject.UI.Controllers
 
         public ActionResult EditProfile()
         {
-            return View();
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("login");
+            }
+            User currentUser = Session["login"] as User;
+
+            return View(currentUser);
         }
         [HttpPost]
-        public ActionResult EditProfile(User user)
+        public ActionResult EditProfile(User model, HttpPostedFileBase ProfileImage)
         {
+            if (ProfileImage != null && (
+                ProfileImage.ContentType == "image/jpeg" ||
+                ProfileImage.ContentType == "image/jpg" ||
+                ProfileImage.ContentType == "image/png"))
+            {
+                string filename = $"user{model.Id}.{ProfileImage.ContentType.Split('/')[1]}";
+
+                ProfileImage.SaveAs(Server.MapPath($"~/Content/image/{filename}"));
+                model.ProfileImageFilename = filename;
+            }
+
+            BusinessLayerResult<User> res = um.UpdateProfile(model);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorObj = new ErrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profile could not be updated",
+                    RedirectingUrl = "/Home/EditProfile"
+                };
+                Session["login"] = res.Result;
+                return View();
+            }
+
             return View();
         }
 

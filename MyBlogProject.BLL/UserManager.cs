@@ -234,5 +234,45 @@ namespace MyBlogProject.BLL
             return res;
 
         }
+
+        public BusinessLayerResult<User> UpdateProfile(User model)
+        {
+            User db_user = repo_user.Find(x => x.Id != model.Id && (x.Username == model.Username || x.Email == model.Email));
+
+            BusinessLayerResult<User> res = new BusinessLayerResult<User>();
+
+            if (db_user != null && db_user.Id != model.Id)
+            {
+                if (db_user.Email == model.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "Email adresi kayıtlı");
+                }
+                if (db_user.Username == model.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı");
+                }
+                return res;
+            }
+
+            res.Result = repo_user.Find(x => x.Id == model.Id);
+            res.Result.Email = model.Email;
+            res.Result.Username = model.Username;
+            res.Result.Name = model.Name;
+            res.Result.Surname = model.Surname;
+            res.Result.Password = model.Password;
+
+            if (string.IsNullOrEmpty(model.ProfileImageFilename) == false)
+            {
+                res.Result.ProfileImageFilename = model.ProfileImageFilename;
+            }
+
+            if (repo_user.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil Güncellenemedi");
+            }
+
+            return res;
+
+        }
     }
 }
