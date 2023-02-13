@@ -36,7 +36,7 @@ namespace MyBlogProject.UI.Controllers
 
             //return View(bm.GetAllBlogs().OrderByDescending(i => i.ModifiedOn).ToList());
 
-            return View(bm.GetAllBlogsQueryable().Include("Owner").OrderByDescending(i => i.ModifiedOn).ToList());
+            return View(bm.ListQueryable().Include("Owner").OrderByDescending(i => i.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -68,7 +68,7 @@ namespace MyBlogProject.UI.Controllers
 
         public ActionResult MostLiked()
         {
-            return View("Index", bm.GetAllBlogsQueryable().OrderByDescending(i => i.LikeCount).ToList());
+            return View("Index", bm.ListQueryable().OrderByDescending(i => i.LikeCount).ToList());
         }
         public ActionResult About()
         {
