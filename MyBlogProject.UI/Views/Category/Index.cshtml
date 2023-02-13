@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MyBlogProject.Entity.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="~/Content/css/css_table/fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="~/Content/css/css_table/owl.carousel.min.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="~/Content/css/css_table/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="~/Content/css/css_table/style.css">
+
+
+
+
+    <div class="container">
+        <br />
+        <br />
+
+             <div class="table-responsive custom-table-responsive">
+
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col" > @Html.ActionLink("Create New", "Create")  </th>
+                    </tr>
+                </thead>
+
+                <thead>
+                    <tr>
+
+                        <th scope="col"> @Html.DisplayNameFor(model => model.CreateOn)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedOn)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedUsername)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">   </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateOn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModifiedOn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModifiedUsername)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                            </td>
+                        </tr>
+                        <tr class="spacer"><td colspan="100"></td></tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#footer').hide();
+    });
+</script>

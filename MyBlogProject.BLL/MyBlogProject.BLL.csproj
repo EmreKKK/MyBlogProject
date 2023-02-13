@@ -52,8 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogManager.cs" />
-    <Compile Include="BusinessLayerResult.cs" />
+    <Compile Include="Results\BusinessLayerResult.cs" />
     <Compile Include="CategoryManager.cs" />
+    <Compile Include="Abstract\ManagerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="UserManager.cs" />
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\MyBlogProject.Common\MyBlogProject.Common.csproj">
       <Project>{a5790351-baed-466c-a84e-a262a8cc39af}</Project>
       <Name>MyBlogProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyBlogProject.Core\MyBlogProject.Core.csproj">
+      <Project>{856cd3ae-56f6-4340-bc7a-0cd7c4100da0}</Project>
+      <Name>MyBlogProject.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyBlogProject.DAL\MyBlogProject.DAL.csproj">
       <Project>{9bc04d66-ece4-4f06-ac99-f22c9e452f04}</Project>

@@ -1,4 +1,5 @@
 ﻿using MyBlogProject.Core.DataAccess;
+using MyBlogProject.DAL.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,43 +7,46 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogProject.DAL.MySQL
+namespace MyBlogProject.BLL.Abstract
 {
-    internal class Repository<T> : RepositoryBase,IRepository<T> where T : class
+    public abstract class ManagerBase<T> : IRepository<T> where T : class
     {
+        private Repository<T> repo = new Repository<T>();
+        
+
         public int Delete(T obj)
         {
-            throw new NotImplementedException();
+            return repo.Delete(obj);
         }
 
         public T Find(Expression<Func<T, bool>> where)
         {
-            throw new NotImplementedException();
+            return repo.Find(where);
         }
 
         public int Insert(T obj)
         {
-            throw new NotImplementedException();
+            return repo.Insert(obj);
         }
 
         public List<T> List()
         {
-            throw new NotImplementedException();
+            return repo.List();
         }
 
         public List<T> List(Expression<Func<T, bool>> where)
         {
-            throw new NotImplementedException();
+            return repo.List(where);
         }
 
         public IQueryable<T> ListQueryable()
         {
-            throw new NotImplementedException();
+            return repo.ListQueryable();
         }
 
         public int Update(T obj)
         {
-            throw new NotImplementedException();
+            return repo.Update(obj);
         }
     }
 }

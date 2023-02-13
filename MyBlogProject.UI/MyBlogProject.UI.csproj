@@ -112,13 +112,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\NotifyViewModelBase.cs" />
@@ -141,6 +141,11 @@
     <Content Include="Views\Shared\Warning.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -151,7 +156,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyBlogProject.BLL\MyBlogProject.BLL.csproj">
@@ -161,6 +165,10 @@
     <ProjectReference Include="..\MyBlogProject.Common\MyBlogProject.Common.csproj">
       <Project>{a5790351-baed-466c-a84e-a262a8cc39af}</Project>
       <Name>MyBlogProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyBlogProject.Core\MyBlogProject.Core.csproj">
+      <Project>{856cd3ae-56f6-4340-bc7a-0cd7c4100da0}</Project>
+      <Name>MyBlogProject.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyBlogProject.Entity\MyBlogProject.Entity.csproj">
       <Project>{8374c23b-aa24-485d-9a15-6f25465591e7}</Project>

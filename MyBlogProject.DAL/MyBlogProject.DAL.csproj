@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="EF\Repository.cs" />
     <Compile Include="EF\RepositoryBase.cs" />
@@ -68,6 +67,10 @@
       <Project>{a5790351-baed-466c-a84e-a262a8cc39af}</Project>
       <Name>MyBlogProject.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyBlogProject.Core\MyBlogProject.Core.csproj">
+      <Project>{856cd3ae-56f6-4340-bc7a-0cd7c4100da0}</Project>
+      <Name>MyBlogProject.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBlogProject.Entity\MyBlogProject.Entity.csproj">
       <Project>{8374c23b-aa24-485d-9a15-6f25465591e7}</Project>
       <Name>MyBlogProject.Entity</Name>
@@ -76,6 +79,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

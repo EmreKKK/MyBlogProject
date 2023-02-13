@@ -1,4 +1,5 @@
-﻿using MyBlogProject.Common.Helpers;
+﻿using MyBlogProject.BLL.Results;
+using MyBlogProject.Common.Helpers;
 using MyBlogProject.DAL.EF;
 using MyBlogProject.Entity;
 using MyBlogProject.Entity.Messages;
@@ -273,6 +274,27 @@ namespace MyBlogProject.BLL
 
             return res;
 
+        }
+
+        public BusinessLayerResult<User> RemoveUserById(int id)
+        {
+            BusinessLayerResult<User> res = new BusinessLayerResult<User>();
+            User user = repo_user.Find(x => x.Id == id);
+
+            if (user != null)
+            {
+                if (repo_user.Delete(user) == 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi");
+                    return res;
+                }
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı bulunamadı.");
+            }
+
+            return res;
         }
     }
 }

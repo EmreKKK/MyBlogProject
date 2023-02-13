@@ -17,5 +17,7 @@ namespace MyBlogProject.Entity.Messages
         ActivationIdDoesNotExist = 1007,
         UserIsNotFound = 1008,
         ProfileCouldNotUpdated = 1009,
+        UserCouldNotRemove = 1010,
+        UserCouldNotFind = 1011,
     }
 }

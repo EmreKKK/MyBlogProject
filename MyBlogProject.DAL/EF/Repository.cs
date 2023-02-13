@@ -1,6 +1,6 @@
 ﻿using MyBlogProject.Common;
 using MyBlogProject.DAL;
-using MyBlogProject.DAL.Abstract;
+using MyBlogProject.Core.DataAccess;
 using MyBlogProject.Entity;
 using System;
 using System.Collections.Generic;

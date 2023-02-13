@@ -1,4 +1,5 @@
 ﻿using MyBlogProject.BLL;
+using MyBlogProject.BLL.Results;
 using MyBlogProject.Entity;
 using MyBlogProject.Entity.Messages;
 using MyBlogProject.Entity.ViewModels;
@@ -52,7 +53,7 @@ namespace MyBlogProject.UI.Controllers
                 }
 
 
-                Category cat = cm.GetCategoryById(id.Value);
+                Category cat = cm.Find(x => x.Id == id);
 
                 if (cat == null)
                 {
@@ -267,7 +268,24 @@ namespace MyBlogProject.UI.Controllers
 
         public ActionResult DeleteProfile()
         {
-            return View();
+            User currentUser = Session["login"] as User;
+            BusinessLayerResult<User> res = um.RemoveUserById(currentUser.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profile could not be updated",
+                    RedirectingUrl = "/Home/ShowProfile"
+                };
+
+                return View("Error", errorNotifyObj);
+
+            }
+            Session.Clear();
+            return RedirectToAction("Index");
+
         }
     }
 }
