@@ -51,6 +51,9 @@ namespace MyBlogProject.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category category)
         {
+            ModelState.Remove("CreateOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedUsername");
             if (ModelState.IsValid)
             {
                 cm.Insert(category);
@@ -63,6 +66,7 @@ namespace MyBlogProject.UI.Controllers
         // GET: Category/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,11 +84,17 @@ namespace MyBlogProject.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,CreateOn,ModifiedOn,ModifiedUsername")] Category category)
+        public ActionResult Edit(Category category)
         {
+            ModelState.Remove("CreateOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedUsername");
             if (ModelState.IsValid)
             {
-                cm.Update(category);
+                Category cat = cm.Find(x => x.Id== category.Id);
+                cat.Title = category.Title;
+                cat.Description = category.Description;
+                cm.Update(cat);
                 return RedirectToAction("Index");
             }
             return View(category);

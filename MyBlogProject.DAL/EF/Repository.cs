@@ -64,8 +64,8 @@ namespace MyBlogProject.DAL.EF
                 o.ModifiedOn = DateTime.Now;
                 o.ModifiedUsername = App.Common.GetUsername();
             }
-
-            return _db.SaveChanges();
+            int s = _db.SaveChanges();
+            return s;
         }
         public int Delete(T obj)
 

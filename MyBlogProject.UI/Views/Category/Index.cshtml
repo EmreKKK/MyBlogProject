@@ -21,71 +21,81 @@
 
 
 
-    <div class="container">
-        <br />
-        <br />
 
-             <div class="table-responsive custom-table-responsive">
+<br />
+<br />
 
-            <table class="table custom-table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col" > @Html.ActionLink("Create New", "Create")  </th>
-                    </tr>
-                </thead>
+<div class="table-responsive custom-table-responsive">
 
-                <thead>
-                    <tr>
+    <table class="table custom-table">
+        <thead>
+            <tr>
+                <div class="form-group">
+                    <div class="col-mx-10">
+                        <button type="submit" class="btn btn-outline-dark border-0">
+                            <span class="bi bi-plus-circle"></span> Create
+                        </button>
+                    </div>
+                </div>
+            </tr>
+        </thead>
 
-                        <th scope="col"> @Html.DisplayNameFor(model => model.CreateOn)</th>
-                        <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedOn)</th>
-                        <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedUsername)</th>
-                        <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
-                        <th scope="col"> @Html.DisplayNameFor(model => model.Description)</th>
-                        <th scope="col">   </th>
-                    </tr>
-                </thead>
-                <tbody>
+        <thead>
+            <tr>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreateOn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedOn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedUsername)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                            </td>
-                        </tr>
-                        <tr class="spacer"><td colspan="100"></td></tr>
-                    }
+                <th scope="col"> @Html.DisplayNameFor(model => model.CreateOn)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedOn)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.ModifiedUsername)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.Description)</th>
+                <th scope="col">   </th>
+            </tr>
+        </thead>
+        <tbody>
 
-                </tbody>
-            </table>
-        </div>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedUsername)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
 
-    </div>
+                        <a href="/Category/Edit/@item.Id" class="btn btn-warning" title="Edit">
+                            <span class="bi bi-pencil-square"></span>
+                        </a>
+                        <a href="/Category/Details/@item.Id" class="btn btn-info" title="Details">
+                            <span class="bi bi-clipboard"></span>
+                        </a>
+                        <a href="/Category/Delete/@item.Id" class="btn btn-danger" title="Delete">
+                            <span class="bi bi-eraser"></span>
+                        </a>
 
+
+                    </td>
+                </tr>
+                <tr class="spacer"><td colspan="100"></td></tr>
+            }
+
+        </tbody>
+    </table>
 </div>
+
+
+
+
 
 
 
