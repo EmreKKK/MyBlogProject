@@ -19,5 +19,6 @@ namespace MyBlogProject.Entity.Messages
         ProfileCouldNotUpdated = 1009,
         UserCouldNotRemove = 1010,
         UserCouldNotFind = 1011,
+        UserCouldNotInserted = 1012,
     }
 }

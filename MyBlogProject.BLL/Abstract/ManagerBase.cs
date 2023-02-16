@@ -24,7 +24,7 @@ namespace MyBlogProject.BLL.Abstract
             return repo.Find(where);
         }
 
-        public int Insert(T obj)
+        public virtual int Insert(T obj)
         {
             return repo.Insert(obj);
         }
@@ -44,7 +44,7 @@ namespace MyBlogProject.BLL.Abstract
             return repo.ListQueryable();
         }
 
-        public int Update(T obj)
+        public virtual int Update(T obj)
         {
             return repo.Update(obj);
         }

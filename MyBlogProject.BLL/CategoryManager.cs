@@ -20,8 +20,8 @@ namespace MyBlogProject.BLL
             foreach(Blog item in cat.Blogs.ToList())
             {
 
-                Blog blog = blogManager.ListQueryable().Include("Comment").Include("Likes").FirstOrDefault(x=>x.Id==item.Id);
-                foreach(Comment comments in blog.Comments.ToList())
+                Blog blog = blogManager.ListQueryable().Include("Comments").Include("Likes").FirstOrDefault(x=>x.Id==item.Id);
+                foreach(Comment comments in item.Comments.ToList())
                 {
                     commentManager.Delete(comments);
                 }

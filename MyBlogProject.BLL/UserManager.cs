@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace MyBlogProject.BLL
 {
-    public class UserManager:ManagerBase<User>
+    public class UserManager : ManagerBase<User>
     {
-       
+
         public BusinessLayerResult<User> RegisterUser(RegisterViewModel model)
         {
 
@@ -47,7 +47,7 @@ namespace MyBlogProject.BLL
             }
             else
             {
-                int dbResult = Insert(new User()
+                int dbResult = base.Insert(new User()
                 {
                     Username = model.Username,
                     Email = model.Email,
@@ -268,7 +268,7 @@ namespace MyBlogProject.BLL
                 res.Result.ProfileImageFilename = model.ProfileImageFilename;
             }
 
-            if (Update(res.Result) == 0)
+            if (base.Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil Güncellenemedi");
             }
@@ -293,6 +293,89 @@ namespace MyBlogProject.BLL
             else
             {
                 res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı bulunamadı.");
+            }
+
+            return res;
+        }
+
+        public new BusinessLayerResult<User> Insert(User model)
+        {
+            BusinessLayerResult<User> res = new BusinessLayerResult<User>();
+
+            string message = UserManager.EmailControl(model.Email);
+            if (message != null)
+            {
+                res.AddError(ErrorMessageCode.UnavailableEmail, "Email Syntax Error");
+                return res;
+            }
+
+            User user = Find(i => i.Username == model.Username || i.Email == model.Email);
+
+            res.Result = model;
+            if (user != null)
+            {
+                if (user.Username == model.Username)
+                {
+                    //res.Errors.Add("This username is already taken");
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "This Username is Already Taken");
+                }
+
+                if (user.Email == model.Email)
+                {
+                    //res.Errors.Add("This email is already taken");
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "This Email is Already Taken");
+                }
+
+            }
+            else
+            {
+                res.Result.ProfileImageFilename = "user.jpg";
+                res.Result.ActivateGuid = Guid.NewGuid();
+
+
+                if (base.Insert(res.Result) > 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotInserted, "User Could Not Inserted!");
+                }
+            }
+
+            return res; ;
+        }
+
+        public new BusinessLayerResult<User> Update(User model)
+        {
+            User db_user = Find(x => x.Id != model.Id && (x.Username == model.Username || x.Email == model.Email));
+
+            BusinessLayerResult<User> res = new BusinessLayerResult<User>();
+
+            res.Result = model;
+
+            if (db_user != null && db_user.Id != model.Id)
+            {
+                if (db_user.Email == model.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "Email adresi kayıtlı");
+                }
+                if (db_user.Username == model.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı");
+                }
+                return res;
+            }
+
+            res.Result = Find(x => x.Id == model.Id);
+            res.Result.Email = model.Email;
+            res.Result.Username = model.Username;
+            res.Result.Name = model.Name;
+            res.Result.Surname = model.Surname;
+            res.Result.Password = model.Password;
+            res.Result.IsActive = model.IsActive;
+            res.Result.IsAdmin = model.IsAdmin;
+
+
+            if (base.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil Güncellenemedi");
             }
 
             return res;

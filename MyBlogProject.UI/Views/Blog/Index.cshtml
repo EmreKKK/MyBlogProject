@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MyBlogProject.Entity.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="table-responsive custom-table-responsive">
+
+    <table class="table custom-table">
+        <thead>
+            <tr>
+                <div class="form-group">
+                    <div class="col-mx-10">
+                        <button type="submit" class="btn btn-outline-dark border-0">
+                            <span class="bi bi-plus-circle"></span> Create
+                        </button>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </tr>
+        </thead>
+        
+        <thead>
+            <tr>
+
+                <th scope="col"> @Html.DisplayNameFor(model => model.Category.Title)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.Owner.Name)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.Text)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.IsDraft)</th>
+                <th scope="col"> @Html.DisplayNameFor(model => model.LikeCount)</th>
+                <th scope="col">   </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDraft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeCount)
+                    </td>
+                    <td width="120"> 
+
+                        <a href="/Blog/Edit/@item.Id" class="btn btn-warning btn-sm" title="Edit">
+                            <span class="bi bi-pencil-square"></span>
+                        </a>
+                        <a href="/Blog/Details/@item.Id" class="btn btn-info btn-sm" title="Details">
+                            <span class="bi bi-clipboard"></span>
+                        </a>
+                        <a href="/Blog/Delete/@item.Id" class="btn btn-danger btn-sm" title="Delete">
+                            <span class="bi bi-eraser"></span>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr class="spacer"><td colspan="100"></td></tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#footer').hide();
+    });
+</script>

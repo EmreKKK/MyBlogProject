@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,13 @@ namespace MyBlogProject.Entity
         [StringLength(30)]
         public string ProfileImageFilename { get; set; }
 
+        [DisplayName("Is Active")]
         public bool IsActive { get; set; }
+
+        [DisplayName("Is Admin")]
         public bool IsAdmin { get; set; }
+
+        [Required,ScaffoldColumn(false)]
         public Guid ActivateGuid { get; set; }
         public List<Blog> Blogs { get; set; }
         public List<Comment> Comments { get; set; }

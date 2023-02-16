@@ -63,7 +63,7 @@ namespace MyBlogProject.DAL
                     IsAdmin = false,
                     Username = $"user{i}",
                     Password = "1",
-                    ProfileImageFilename = $"default_avatar_image{i}.png",
+                    ProfileImageFilename = $"user{i}.png",
                     CreateOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
                     ModifiedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
                     ModifiedUsername = $"user{i}"
