@@ -1,0 +1,39 @@
+﻿@using MyBlogProject.Entity
+@using MyBlogProject.UI.Models
+@model List<Comment>
+
+@{
+    User user = CurrentSession.User;
+}
+@foreach (Comment item in Model)
+{
+    <div class="media">
+        <div class="media-left media-middle">
+            <div class="media-object">
+                <span class="bi bi-chat"></span>
+            </div>
+        </div>
+        <div class="media-body">
+            <span class="col-md-10">
+                @item.Text
+            </span>
+            @if (user != null && user.Id == item.Owner.Id)
+            {
+                <span class="col-md-2 text-end">
+                    <button type="button" class="btn btn-warning btn xs">
+                        <span class="bi bi-pencil-square"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn xs">
+                        <span class="bi bi-trash3"></span>
+                    </button>
+                </span>
+            }
+            <small class="col-md-12 text-end">
+                <span class="bi bi-clock"></span>@item.ModifiedOn &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="bi bi-person-circle"></span>@item.ModifiedUsername
+            </small>
+        </div>
+    </div>
+}
+
+

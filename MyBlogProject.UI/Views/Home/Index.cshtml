@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<script src="~/Content/js/jquery-3.6.0.min.js"></script>
 <!-- Header-->
 <header>
     <style>
@@ -99,7 +99,7 @@
 
                                             <div class="ratings">
                                                 <p class="float-end">
-                                                    <button class="btn btn-outline-dark float-end">
+                                                    <button class="btn btn-outline-dark float-end" data-toggle="modal" data-target="#modal_comment" data-blog-id="@blog.Id">
                                                         <span class="bi-signal"></span> Comments
                                                     </button>
                                                 </p>
@@ -123,10 +123,22 @@
                             </div>
                         </div>
                     }
-
-
-
             </div>
         </div>
     </div>
 </div>
+
+@Bootstrap.ModalPopUp(id: "modal_comment", title: "Yorumlar")
+
+<script>
+    $(function () {
+        $('#modal_comment').on('show.bs.modal', function (e) {
+
+            var btn = $(e.relatedTarget);
+            var blogid = btn.data("blog-id");
+            console.log(blogid)
+
+            $('modal_comment_body').load("/Comment/ShowBlogComment/" + blogid);
+        })
+    })
+</script>

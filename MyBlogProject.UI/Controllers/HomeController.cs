@@ -3,6 +3,7 @@ using MyBlogProject.BLL.Results;
 using MyBlogProject.Entity;
 using MyBlogProject.Entity.Messages;
 using MyBlogProject.Entity.ViewModels;
+using MyBlogProject.UI.Models;
 using MyBlogProject.UI.ViewModels;
 using System;
 using System.CodeDom;
@@ -211,7 +212,7 @@ namespace MyBlogProject.UI.Controllers
             {
                 return RedirectToAction("login");
             }
-            User currentUser = Session["login"] as User;
+            User currentUser = CurrentSession.User;
 
             //BusinessLayerResult<User> res = UserManager.GetUserById(currentUser.Id);
 
@@ -231,7 +232,7 @@ namespace MyBlogProject.UI.Controllers
             {
                 return RedirectToAction("login");
             }
-            User currentUser = Session["login"] as User;
+            User currentUser = CurrentSession.User;
 
             return View(currentUser);
         }
@@ -260,23 +261,23 @@ namespace MyBlogProject.UI.Controllers
                     RedirectingUrl = "/Home/EditProfile"
                 };
                 Session["login"] = res.Result;
-                return View();
+                return View("Error", errorObj);
             }
-
-            return View();
+            CurrentSession.Set<User>("login", res.Result);
+            return RedirectToAction("ShowProfile");
         }
 
         public ActionResult DeleteProfile()
         {
-            User currentUser = Session["login"] as User;
-            BusinessLayerResult<User> res = um.RemoveUserById(currentUser.Id);
+            User currentUser = CurrentSession.User;
+            BusinessLayerResult<User> res = um.RemoveUserById(CurrentSession.User.Id);
 
             if (res.Errors.Count > 0)
             {
                 ErrorViewModel errorNotifyObj = new ErrorViewModel()
                 {
                     Items = res.Errors,
-                    Title = "Profile could not be updated",
+                    Title = "Profile Could Not Be Updated",
                     RedirectingUrl = "/Home/ShowProfile"
                 };
 
